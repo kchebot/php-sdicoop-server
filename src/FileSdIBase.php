@@ -38,7 +38,6 @@ class FileSdIBase
         
             $this->NomeFile = $parametersIn->NomeFile;
             $this->File = $parametersIn->File;
-            $this->removeBOM();
         }
     }
 
@@ -55,21 +54,8 @@ class FileSdIBase
 
         $this->NomeFile = basename($file);
         $this->File = file_get_contents($file);
-        $this->removeBOM();
 
         return $this;
     }
 
-    /**
-     * Remove UTF-8 BOM
-     *
-     * Credits: https://forum.italia.it/u/Francesco_Biegi
-     * See https://forum.italia.it/t/risolto-notifica-di-scarto-content-is-not-allowed-in-prolog/5798/7
-     */
-    public function removeBOM()
-    {
-        $this->File = str_replace("\xEF\xBB\xBF", '', $this->File);
-
-        return $this;
-    }
 }
